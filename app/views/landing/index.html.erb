@@ -1,9 +1,5 @@
 
-<%= link_to "Sign In", sign_in_path %>
-<%  %>
-  <%= @insta_user %>
-
-
-<% if @insta_user[:user] != nil %>
-  <%= link_to(image_tag("#{@insta_user[:user][:profile_picture]}"), root_path) %>
+<% unless @user %>
+  <%= link_to "Sign In", sign_in_path %>
 <% end %>
+<%= @user[:token] %>

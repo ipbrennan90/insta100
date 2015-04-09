@@ -1,10 +1,38 @@
+<head>
+  <style type="text/css">
+  .slider {
+    width: 640px;
+    height: 640px;
+    overflow: hidden;
+    margin: 30px auto;
+
+  }
+  .slider img {
+    height: 100%;
+    display: none
+  }
+  </style>
+</head>
+
 
 <% unless current_user %>
   <%= link_to "Sign In", sign_in_path %>
 <% end %>
-<% @search[:data].each do |photo| %>
-  <%= image_tag(photo[:images][:standard_resolution][:url]) %>
-</br>
-</br>
-</br>
+
+
+
+<% if @tag %>
+
+  <% if @search[:data] %>
+  <div class="slider">
+    <% id=0 %>
+    <% @search[:data].each do |photo| %>
+      <% id +=1 %>
+      <%= image_tag(photo[:images][:standard_resolution][:url], id: id) %>
+    <% end %>
+  </div>
+  <% else %>
+    <%= "Your search returned nothing :(" %>
+  <% end %>
+
 <% end %>

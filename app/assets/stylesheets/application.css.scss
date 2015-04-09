@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+ .animateblock {
+   padding: 8px 0;
+   color: #fff;
+   opacity: 0;
+   -webkit-transition: all 0.55s linear;
+   -moz-transition: all 0.55s linear;
+   transition: all 0.55s linear;
+ }
+
+ #dontskip {
+   margin-bottom: 10px;
+ }
+
+ body {
+   background: #000000;
+ }

@@ -21,7 +21,7 @@ class InstagramAPI
 
   def tag_photos(search, token)
     response = @conn.get do |req|
-      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}"
+      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}&count=100"
     end
     JSON.parse(response.body, symbolize_names:true)
   end

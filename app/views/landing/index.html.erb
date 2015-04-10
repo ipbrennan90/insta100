@@ -16,7 +16,9 @@
 
 
 <% unless current_user %>
-  <%= link_to "Sign In", sign_in_path %>
+  <div class="vertical-center">
+    <%= link_to("Sign In", sign_in_path, class: "btn btn-default") %>
+  </div>
 <% end %>
 
 
@@ -28,7 +30,7 @@
     <% id=0 %>
     <% @response[:data].each do |photo| %>
       <% id +=1 %>
-      <%= image_tag(photo[:images][:standard_resolution][:url], id: id) %>
+      <%= image_tag(photo[:images][:standard_resolution][:url], id: id, class: "img-rounded") %>
     <% end %>
   </div>
   <% else %>

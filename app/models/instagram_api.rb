@@ -17,11 +17,9 @@ class InstagramAPI
 
   end
 
-
-
   def tag_photos(search, token)
     response = @conn.get do |req|
-      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}&count=100"
+      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}&count=3"
     end
     JSON.parse(response.body, symbolize_names:true)
   end
@@ -40,7 +38,7 @@ class InstagramAPI
     JSON.parse(response.body, symbolize_names:true)
   end
 
-  def selfie(token) 
+  def selfie(token)
     response = @conn.get do |req|
       req.url "/v1/users/11378769/media/recent/?access_token=#{token}"
     end

@@ -5,7 +5,7 @@ class UsersController<ApplicationController
     insta_user = insta_api.token(params[:code])
 
 
-    @user = User.create(token: insta_user[:access_token], name:insta_user[:user][:username], prof_pic:insta_user[:user][:profile_picture])
+    @user = User.create(token: insta_user[:access_token], name:insta_user[:user][:username], prof_pic:insta_user[:user][:profile_picture], client_id:insta_user[:user][:id])
     session[:user_id]=@user.id
     unless User.all.pluck(:token).include?(@user.token)
       @user.save

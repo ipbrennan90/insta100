@@ -6,7 +6,7 @@ class UsersController<ApplicationController
 
 
     @user = User.create!(token: insta_user[:access_token], name:insta_user[:user][:username], prof_pic:insta_user[:user][:profile_picture])
-    if @user.save
+    if @user.
       session[:user_id]=@user.id
       redirect_to root_path
 

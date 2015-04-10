@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'geocoder'
+
 gem 'instagram'
 
 gem 'faraday'

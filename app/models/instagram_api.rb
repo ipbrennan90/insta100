@@ -26,9 +26,16 @@ class InstagramAPI
     JSON.parse(response.body, symbolize_names:true)
   end
 
-  def location_photos(search, token)
+  def location_photos(lat,long, token)
     response = @conn.get do |req|
-      req.url "/v1/locations/#{search}/media/recent?access_token=#{token}"
+      req.url "/v1/media/search?lat=#{lat}&lng=#{long}&access_token=#{token}"
+    end
+    JSON.parse(response.body, symbolize_names:true)
+  end
+
+  def popular(token)
+    response = @conn.get do |req|
+      req.url "/v1/media/popular?access_token=#{token}"
     end
     JSON.parse(response.body, symbolize_names:true)
   end

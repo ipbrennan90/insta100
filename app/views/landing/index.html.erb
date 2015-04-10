@@ -21,12 +21,12 @@
 
 
 
-<% if @tag %>
+<% if @search || @location%>
 
-  <% if @search[:data] %>
+  <% if @response[:data] %>
   <div class="slider">
     <% id=0 %>
-    <% @search[:data].each do |photo| %>
+    <% @response[:data].each do |photo| %>
       <% id +=1 %>
       <%= image_tag(photo[:images][:standard_resolution][:url], id: id) %>
     <% end %>

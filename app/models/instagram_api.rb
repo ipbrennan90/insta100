@@ -40,4 +40,11 @@ class InstagramAPI
     JSON.parse(response.body, symbolize_names:true)
   end
 
+  def selfie(token) 
+    response = @conn.get do |req|
+      req.url "/v1/users/11378769/media/recent/?access_token=#{token}"
+    end
+    JSON.parse(response.body, symbolize_names:true)
+  end
+
 end

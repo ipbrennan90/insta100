@@ -1,40 +1,48 @@
-<head>
-  <style type="text/css">
-  .slider {
-    width: 640px;
-    height: 640px;
-    overflow: hidden;
-    margin: 30px auto;
-
-  }
-  .slider img {
-    height: 100%;
-    display: none
-  }
-  </style>
-</head>
-
-
-<% unless current_user %>
-  <div class="vertical-center">
-    <%= link_to("Sign In", sign_in_path, class: "btn btn-default") %>
-  </div>
-<% end %>
 
 
 
-<% if @search || @location%>
+<% if current_user %>
+  <% if @search || @location%>
+
+    <% if @response[:data] %>
+    <div class="slider" value = <%= current_user.id %>>
+      <% id=0 %>
+      <% @response[:data].each do |photo| %>
+        <% id +=1 %>
+        <%= image_tag(photo[:images][:standard_resolution][:url], id: id, class: "instagram-image img-rounded") %>
+      <% end %>
+    </div>
+    <% else %>
+      <%= "Your search returned nothing :(" %>
+    <% end %>
+
+  <% else %>
+    <% @response = @insta_api.selfie(current_user.token)  %>
+    <div class="slider" value = <%= current_user.id %>>
+      <% id=0 %>
+      <% @response[:data].each do |photo| %>
+        <% id +=1 %>
+        <%= image_tag(photo[:images][:standard_resolution][:url], id: id, class: "instagram-image img-rounded") %>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
 
   <% if @response[:data] %>
-  <div class="slider">
-    <% id=0 %>
-    <% @response[:data].each do |photo| %>
-      <% id +=1 %>
-      <%= image_tag(photo[:images][:standard_resolution][:url], id: id, class: "img-rounded") %>
-    <% end %>
-  </div>
-  <% else %>
-    <%= "Your search returned nothing :(" %>
+
+    <div class="banner">
+      <div class="signO">
+        <%= link_to sign_in_path do %>
+          <%= image_tag("instagramlogo.png") %>
+        <% end %>
+      </div>
+
+      <% id=0 %>
+      <% @response[:data].each do |photo| %>
+        <% id +=1 %>
+        <%= image_tag(photo[:images][:standard_resolution][:url], id: id, class: "instagram-image img-rounded") %>
+      <% end %>
+    </div>
   <% end %>
 
 <% end %>

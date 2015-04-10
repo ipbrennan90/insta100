@@ -8,9 +8,17 @@ $(document).ready(function(){
       this.nextImage = 1;
 
       setInterval(function(){
-        this.fadeAllOut($(".slider img"));
-        this.rotateImage();
-        this.fadeImageIn($("#"+this.nextImage))
+        // debugger;
+        this.fadeAllOut($(".instagram-image"))
+        if($(".slider").attr("value")){
+          this.rotateImage();
+          this.fadeImageIn($("#"+this.nextImage))
+        }
+        else{
+          this.rotateImage();
+          this.fadeImageIn($("#"+this.nextImage))
+        }
+
 
       }.bind(this), 3000)
     },
@@ -21,7 +29,7 @@ $(document).ready(function(){
       $images.fadeOut(900);
     },
     rotateImage: function() {
-      if (this.currentImage > this.imageCount) {
+      if (this.nextImage > this.imageCount) {
         this.nextImage = 1;
         this.currentImage = 1;
       } else {

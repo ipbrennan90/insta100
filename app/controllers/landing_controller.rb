@@ -3,25 +3,31 @@ class LandingController < ApplicationController
   def index
     @insta_api = InstagramAPI.new
 
-    search_type=params[:search_type]
+    @search_type=params[:@search_type]
+
 
     if current_user.present?
 
 
-      unless search_type =="2"
+      unless @search_type =="2"
         @search=params[:search]
       end
 
-      if @search.blank?
-        @response = {}
-        flash[:error] = "Please enter something"
-      elsif search_type == "1"
-        @response = @insta_api.tag_photos("#{@search}", "#{current_user.token}")
-      elsif search_type =="2"
-        @location=Location.create!(address: "#{@search}")
-        @response=@insta_api.location_photos(@location.latitude, @location.longitude, "#{current_user.token}")
-      elsif search_type =="3"
-        @response = @insta_api.selfie("#{current_user.token}")
+      if @search_type
+        if @search_type == "1"
+          @response = @insta_api.tag_photos("#{@search}", "#{current_user.token}")
+        elsif @search_type =="2"
+          @location=Location.create!(address: "#{@search}")
+          @response=@insta_api.location_photos(@location.latitude, @location.longitude, "#{current_user.token}")
+        elsif @search_type =="3"
+
+          @response = @insta_api.user_selfie("#{current_user.client_id}","#{current_user.token}")
+          binding.pry
+        elsif @search_type == "4"
+
+          @response = @insta_api.liked_feed("#{current_user.token}")
+
+        end
       end
     else
       token = ENV['API_TOKEN']

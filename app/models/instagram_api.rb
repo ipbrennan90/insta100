@@ -19,7 +19,7 @@ class InstagramAPI
 
   def tag_photos(search, token)
     response = @conn.get do |req|
-      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}&count=3"
+      req.url "/v1/tags/#{search}/media/recent?access_token=#{token}&count=100"
     end
     JSON.parse(response.body, symbolize_names:true)
   end
@@ -38,11 +38,26 @@ class InstagramAPI
     JSON.parse(response.body, symbolize_names:true)
   end
 
+  def user_selfie(client, token)
+    response = @conn.get do |req|
+      req.url "/v1/users/#{client}/media/recent/?access_token=#{token}"
+    end
+    JSON.parse(response.body, symbolize_names:true)
+  end
+
   def selfie(token)
     response = @conn.get do |req|
       req.url "/v1/users/11378769/media/recent/?access_token=#{token}"
     end
     JSON.parse(response.body, symbolize_names:true)
   end
+
+  def liked_feed(token)
+    response = @conn.get do |req|
+      req.url "/v1/users/self/media/liked?access_token=#{token}"
+    end
+    JSON.parse(response.body, symbolize_names:true)
+  end
+
 
 end

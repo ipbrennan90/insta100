@@ -3,6 +3,9 @@
 
 <% if current_user %>
   <% if @search || @location%>
+  <%= binding.pry %>
+    <% if @response %>
+
 
     <% if @response[:data] %>
     <div class="slider" value = <%= current_user.id %>>
@@ -28,6 +31,7 @@
   <% end %>
 <% else %>
 
+  <% if @response[:data] %>
 
     <div class="banner">
       <div class="signO">
@@ -44,4 +48,5 @@
     </div>
   <% end %>
 
+<% end %>
 <% end %>
